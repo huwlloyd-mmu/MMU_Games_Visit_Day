@@ -28,11 +28,16 @@ If you are at the visit day, this step will be demonstrated on the screen, so yo
 
 function TIC()
 {
-	// this code is run once every screen refresh
-	cls() // clear the screen
+   // this code is run once every screen refresh
+   cls() // clear the screen
 }
 ```
 6. Now to clear out the sprite sheet. Switch to the sprite editor, and following the picture above, set the view and tool sizes so that you can quickly clear out the sprite with the pencil tool. The window on the left is where you can make changes, the window on the right shows the entire _spritesheet_. This is where all the sprites for a game are stored in one big image. Make sure the colour is set to black from the palette, and scrub out the sprites with the pencil tool. When you are done, move the sliders back to the left and bottom respectively.
+
+You can see the steps for part 1 in this video:
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1128062/sp/112806200/embedIframeJs/uiconf_id/27474902/partner_id/1128062?iframeembed=true&playerId=kaltura_player&entry_id=1_it4ahr9h&flashvars[akamaiHD.loadingPolicy]=preInitialize&amp;flashvars[akamaiHD.asyncInit]=true&amp;flashvars[streamerType]=hdnetwork&amp;flashvars[localizationCode]=en&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ujtewgd1" width="800" height="529" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe>
+
 
 # Step 2: Starry background
 
@@ -46,17 +51,17 @@ function CreateStars()
    numStars = 200
    for ( i = 0; i < numStars; i++ )
    {
-   		 stars.push( {x: 240*Math.random(), y:136*Math.random()} )
+       stars.push( {x: 240*Math.random(), y:136*Math.random()} )
    }
 }
 
 function TIC()
 {
-	if ( stars.length == 0 )
-	{
-		CreateStars()
-	}
-	cls()
+   if ( stars.length == 0 )
+   {
+      CreateStars()
+   }
+   cls()
 }
 ```
 
@@ -67,10 +72,10 @@ There is quite a lot going on here. We have used an __array__ called stards (den
 ```js
 function DrawStars( )
 {
-	for ( i = 0; i < stars.length; i++ )
-	{
+   for ( i = 0; i < stars.length; i++ )
+   {
       pix(stars[i].x, stars[i].y, 12) // colour 12 is white
-	}
+   }
 }
 ```
 
@@ -79,18 +84,21 @@ function DrawStars( )
 ```js
 function TIC()
 {
-	if ( stars.length == 0 )
-	{
-		CreateStars()
-	}
-	cls()
-    DrawStars() 
+   if ( stars.length == 0 )
+   {
+      CreateStars()
+   }
+   cls()
+   DrawStars() 
 }
 ```
 4. Try running the game. You should see a fixed, starry background, like this:
 
 ![](stars1.png)
 
+Step 2 is covered in this video:
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1128062/sp/112806200/embedIframeJs/uiconf_id/27474902/partner_id/1128062?iframeembed=true&playerId=kaltura_player&entry_id=1_bpaiokfs&flashvars[akamaiHD.loadingPolicy]=preInitialize&amp;flashvars[akamaiHD.asyncInit]=true&amp;flashvars[streamerType]=hdnetwork&amp;flashvars[localizationCode]=en&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qwqheyig" width="800" height="529" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Kaltura Player"></iframe>
 
 # Step 3: Scrolling stars
 
@@ -101,10 +109,10 @@ The next step is to make the stars scroll vertically. We do this in two parts. I
 ```js
 function DrawStars( offset )
 {
-	for ( i = 0; i < stars.length; i++ )
-	{
-		pix(stars[i].x, stars[i].y + offset, 12)
-	}
+   for ( i = 0; i < stars.length; i++ )
+   {
+      pix(stars[i].x, stars[i].y + offset, 12)
+   }
 }
 ```
 
@@ -115,13 +123,13 @@ time = 0
 
 function TIC()
 {
-	if ( stars.length == 0 )
-	{
-		CreateStars();
-	}
-	time += 1;
-	cls();
-	DrawStars( time );
+   if ( stars.length == 0 )
+   {
+      CreateStars();
+   }
+   time += 1;
+   cls();
+   DrawStars( time );
 }
 ```
 
@@ -131,10 +139,10 @@ This works, but the stars fall off the bottom of the screen. There is a trick we
 ```js
 function DrawStars( offset )
 {
-	for ( i = 0; i < stars.length; i++ )
-	{
-		pix(stars[i].x, (stars[i].y + offset)%136, 12)
-	}
+   for ( i = 0; i < stars.length; i++ )
+   {
+      pix(stars[i].x, (stars[i].y + offset)%136, 12)
+   }
 }
 ```
 
@@ -162,7 +170,7 @@ shipy = 110
 3. Now we add a line of code in __TIC()__, just after the call to DrawStars()
 
 ```js
-	spr( 257, shipx, shipy, 0, 1, 0, 0, 2, 2)
+   spr( 257, shipx, shipy, 0, 1, 0, 0, 2, 2)
 ```
 
 > Note: 257 is the index of the sprite in the sprite sheet. __shipx__ and __shipy__ are the x and y coordinates of the ship. The other numbers here control things like the scale, rotation and so on. You can look them all up [here](https://github.com/nesbox/TIC-80/wiki/spr)
@@ -170,10 +178,10 @@ shipy = 110
 4. Next up are some controls. Add the following code in __TIC()__. You can put this anywhere inside __TIC()__, it's best to put it before the code that draws the ship.
 
 ```js
-	if ( btn(3) && shipx < 224 )
-		shipx += 1
-	if ( btn(2) && shipx > 0)
-		shipx -= 1
+   if ( btn(3) && shipx < 224 )
+      shipx += 1
+   if ( btn(2) && shipx > 0)
+      shipx -= 1
 ```
 
 > This code does two things: first it checks the button presses and updates the ship position if the left or right arrow keys are pressed. Secondly, it stops the ship going off the screen if the x position is out of range - the __&&__ means 'and', so the __if__ statements are each checking that two conditions are true.
@@ -198,22 +206,22 @@ bullets = []
 3. Next we will add some code to the __TIC()__ function which checks for presses on the __X__ button (which is button 5 on Tic-80) and adds a bullet to the array if a button press is detected. You should add this code just after the code for controlling the ship.
 ```js
 // in TIC(), after the other control code
-	if ( btnp(5) )
-	{
-		bullet = {x:shipx+4, y:shipy-2}
-		bullets.push(bullet)
-	}
+   if ( btnp(5) )
+   {
+      bullet = {x:shipx+4, y:shipy-2}
+      bullets.push(bullet)
+   }
 ```
 4. Finally, we will add some code to draw the bullets and move them. Notice how this code draws each bullet using the __spr__ command, then changes its __y__ value so that it moves up the screen. Add this code at the end of the __TIC()__ function (before the final curly bracket).
 
 ```js
 // at the end of TIC()
-	// draw bullets
-	for ( i = 0; i < bullets.length; i++ )
-	{
-		spr(259, bullets[i].x, bullets[i].y, 0 )
-		bullets[i].y -= 1
-	}
+   // draw bullets
+   for ( i = 0; i < bullets.length; i++ )
+   {
+      spr(259, bullets[i].x, bullets[i].y, 0 )
+      bullets[i].y -= 1
+   }
 ```
 
 * Your game should now look like this.
@@ -225,14 +233,14 @@ bullets = []
 There is an issue with this; the bullet array keeps getting bigger and bigger because we add bullets but never remove them. We could fix this by removing bullets which have travelled off the top of the screen. You could do this by adding the following two lines of code just before the __for__ loop. The __shift__ function takes the first element of an array, discards it and shifts everything down one. Note this only checks the first element of the array, but only one bullet can go off screen at a time, and it is always the first one in the array.
 
 ```js
-	if (bullets.length > 0 && bullets[0].y < -8 )
-		bullets.shift()
+   if (bullets.length > 0 && bullets[0].y < -8 )
+      bullets.shift()
 ```
 
 If you want to demonstrate that this works, add this to the end of __TIC()__ to show the number of bullets on the screen.
 
 ```js
-	print(""+bullets.length, 0, 0)
+   print(""+bullets.length, 0, 0)
 ```
 
 
@@ -241,14 +249,14 @@ If you want to demonstrate that this works, add this to the end of __TIC()__ to 
 1. To slow the bullets down by a factor two, replace 
 
 ```js
-	time += 1;
+   time += 1;
 ```
 
 with
 
 
 ```js
-	time += 0.5;
+   time += 0.5;
 ```
 
 You can speed them up by using a number greater than 1.
@@ -259,21 +267,21 @@ You can speed them up by using a number greater than 1.
 function CreateStars()
 {
    numStars = 200
-	for ( i = 0; i < numStars; i++ )
-	{
-		if ( Math.random() < 0.5 )
-    		colour = 12
-    	else
-    		colour = 13
-		stars.push( {x: 240*Math.random(), y:136*Math.random(), colour:colour} )
-	}
+   for ( i = 0; i < numStars; i++ )
+   {
+      if ( Math.random() < 0.5 )
+    	 colour = 12
+      else
+    	 colour = 13
+      stars.push( {x: 240*Math.random(), y:136*Math.random(), colour:colour} )
+   }
 }
 
 function DrawStars( offset )
 {
-	for ( i = 0; i < stars.length; i++ )
-	{
-		pix(stars[i].x, (stars[i].y + offset)%136, stars[i].colour)
-	}
+   for ( i = 0; i < stars.length; i++ )
+   {
+      pix(stars[i].x, (stars[i].y + offset)%136, stars[i].colour)
+   }
 }
 ```
